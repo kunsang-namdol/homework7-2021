@@ -30,12 +30,14 @@ document.querySelector("#mute").addEventListener("click", function() {
 	
 });
 
-//FIX IT
-// document.querySelector("#volume").addEventListener("click", function () {
-// 	console.log("change slider")
-// 	video.play()
-// 	document.querySelector("volume").innerHTML = video.volume * 100 + "%";
-// });
+document.querySelector("#slider").addEventListener("change", function () {
+	console.log("change slider")
+	video.play()
+	video.volume = this.value/100;
+	volume.innerHTML = this.value + "%";
+	console.log("video.volume" + video.volume + "this.value" + this.value)
+
+});
 
 document.querySelector("#vintage").addEventListener("click",
 	function() {
@@ -69,11 +71,13 @@ document.querySelector("#faster").addEventListener("click", //FIX ME
 
 document.querySelector("#skip").addEventListener("click", function() {
 	console.log("Skip ahead")
-	video.currentTime += 15
-	if (video.duration < video.currentTime) {
-			console.log("here")
-			video.currentTime = 15
-			video.play()
+	
+	if (video.currentTime < video.duration - 15) {
+		video.currentTime += 15
+	}
+	else {
+		video.currentTime = 0;
+		video.play()
 	}
 	console.group(video.currentTime)
 });
